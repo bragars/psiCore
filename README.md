@@ -1,0 +1,2 @@
+# psiCore
+psicology project
