@@ -11,8 +11,6 @@ import com.rest.repository.IUserDAO;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,7 +20,6 @@ import java.util.stream.Collectors;
 public class DocumentController {
   private final IDocumentDAO documentRepository;
   private final IUserDAO userRepository;
-  private static final Logger LOGGER = LogManager.getLogger();
 
   public DocumentController(IDocumentDAO documentRepository, IUserDAO userRepository) {
     this.documentRepository = documentRepository;
