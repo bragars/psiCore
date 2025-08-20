@@ -1,4 +1,4 @@
-package com.rest.Integration;
+package com.rest.Feature;
 
 import com.rest.TestConfig;
 import com.rest.endpoint.Controllers.UserController;
@@ -36,8 +36,7 @@ public class UserControllerTest {
 
   @Test
   @WithMockUser(username = "user", roles = { "ADMIN" })
-
-  public void shouldRegisterUser() throws Exception {
+  public void shouldCreateUser() throws Exception {
 
     // Mock Data
     User user = new User("root", "root@root.com", "root");

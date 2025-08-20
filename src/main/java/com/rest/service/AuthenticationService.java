@@ -43,12 +43,15 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        System.out.println(">>> MÉTODO AUTHENTICATE DO CONTROLLER FOI CHAMADO! <<<");
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
                             request.getUsername(),
                             request.getPassword()));
 
+            System.err.println(request.getUsername());
+            System.err.println(request.getPassword());
             var user = repository.findByUsername(request.getUsername())
                     .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "User not found"));
 

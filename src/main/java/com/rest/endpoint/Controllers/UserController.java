@@ -1,9 +1,10 @@
 package com.rest.endpoint.Controllers;
 
-import com.rest.exception.UserNotFoundException;
 import com.rest.entity.Document;
 import com.rest.entity.User;
-import com.rest.repository.IUserDAO;
+import com.rest.service.UserService; // Importa o novo serviço
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,12 +12,10 @@ import java.util.Set;
 
 @RequestMapping("/api/v1")
 @RestController
+@RequiredArgsConstructor
 public class UserController {
-  private final IUserDAO repository;
 
-  UserController(IUserDAO repository) {
-    this.repository = repository;
-  }
+  private final UserService userService; // A única dependência agora é o serviço
 
   @GetMapping("/")
   String Home() {
@@ -24,40 +23,53 @@ public class UserController {
   }
 
   @GetMapping("/users")
-  List<User> all() {
-    return repository.findAll();
+  public ResponseEntity<List<User>> getAllUsers() {
+    List<User> users = userService.getAllUsers();
+    return ResponseEntity.ok(users);
   }
 
   @GetMapping("/users/{id}")
-  User getById(@PathVariable Long id) {
-    return repository.findById(id)
-        .orElseThrow(() -> new UserNotFoundException(id));
+  public ResponseEntity<User> getUserById(@PathVariable Long id) {
+    User user = userService.getUserById(id);
+    return ResponseEntity.ok(user);
   }
 
   @GetMapping("/users/{id}/documents")
-  Set<Document> getDocuments(@PathVariable Long id) {
-    var user = repository.findById(id)
-            .orElseThrow(() -> new UserNotFoundException(id));
-    return user.getDocuments();
+  public ResponseEntity<Set<Document>> getUserDocuments(@PathVariable Long id) {
+    Set<Document> documents = userService.getUserDocuments(id);
+    return ResponseEntity.ok(documents);
   }
 
   @PutMapping("/users/{id}")
-  User replaceUser(@RequestBody User newUser, @PathVariable Long id) {
-
-    return repository.findById(id)
-        .map(user -> {
-          user.setUsername(newUser.getUsername());
-          user.setPassword(newUser.getPassword());
-          return repository.save(user);
-        })
-        .orElseGet(() -> {
-          newUser.setId(21);
-          return repository.save(newUser);
-        });
+  public ResponseEntity<User> updateUser(@RequestBody User user, @PathVariable Long id) {
+    User updatedUser = userService.updateUser(id, user);
+    return ResponseEntity.ok(updatedUser);
   }
 
   @DeleteMapping("/users/{id}")
-  void deleteUser(@PathVariable Long id) {
-    repository.deleteById(id);
+  public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+    userService.deleteUser(id);
+    // Retorna 204 No Content, que é a resposta padrão para um DELETE bem-sucedido
+    return ResponseEntity.noContent().build();
   }
 }
+
+// @GetMapping("/authorities")
+// public Map<String, Object> getPrincipalInfo(JwtAuthenticationToken principal)
+// {
+
+// Collection<String> authorities =
+// principal.getAuthorities().stream().map(GrantedAuthority::getAuthority)
+// .collect(Collectors.toList());
+
+// Map<String, Object> info = new HashMap<>();
+// info.put("name", principal.getName());
+// info.put("authorities", authorities);
+// info.put("tokenAttributes", principal.getTokenAttributes());
+
+// if (principal instanceof AccountToken) {
+// info.put("account", ((AccountToken) principal).getAccount());
+// }
+
+// return info;
+// }
