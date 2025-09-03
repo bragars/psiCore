@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
 
 @Configuration
 @EnableWebSecurity
@@ -22,21 +23,25 @@ public class SecurityConfiguration {
   @Autowired
   private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
+  @Autowired
+  private final AccessDenied accessDenied;
   private final JwtAuthenticationFilter jwtAuthFilter;
   private final AuthenticationProvider authenticationProvider;
 
   @Bean
   public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
     return http
-        .csrf(csrf -> csrf.disable())
         .authorizeHttpRequests(auth -> auth
-            .requestMatchers("/api/v1/auth/**").permitAll()
+//                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/v1/auth/**").permitAll()
             .anyRequest().authenticated())
-        .exceptionHandling()
-          .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-        .and()
         .sessionManagement(session -> session
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+        )
+        .csrf(CsrfConfigurer::disable)
+        .exceptionHandling(eh -> eh
+          .authenticationEntryPoint(jwtAuthenticationEntryPoint).accessDeniedHandler(accessDenied)
+        )
         .authenticationProvider(authenticationProvider)
         .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
         .build();

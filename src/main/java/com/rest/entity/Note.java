@@ -1,22 +1,13 @@
 package com.rest.entity;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+
+//@Entity
+//@Table(name="note")
 public class Note {
-  public String goals;
-  public String description;
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public String getGoals() {
-    return goals;
-  }
-
-  public void setGoals(String goals) {
-    this.goals = goals;
-  }
+  public @Getter @Setter String goals;
+  public @Getter @Setter String description;
 }

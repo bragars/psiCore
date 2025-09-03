@@ -1,5 +1,6 @@
 package com.rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,6 +29,8 @@ public class User implements UserDetails {
   private @Getter @Setter long id;
   private @Setter String username;
   private @Getter @Setter String email;
+
+  @JsonIgnore
   private @Setter String password;
 
   @Enumerated(EnumType.STRING)
@@ -40,10 +43,6 @@ public class User implements UserDetails {
     this.username = username;
     this.email = email;
     this.password = password;
-  }
-
-  public Set<Document> getDocuments() {
-    return documents;
   }
 
   @Override
@@ -61,23 +60,4 @@ public class User implements UserDetails {
     return username;
   }
 
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return true;
-  }
 }

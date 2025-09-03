@@ -1,9 +1,7 @@
 package com.rest.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.io.Serializable;
 
@@ -17,7 +15,7 @@ public class Document implements Serializable {
   @GeneratedValue(strategy = GenerationType.AUTO)
 
   private long id;
-  private String name;
+  private @Getter @Setter String name;
 
   @ManyToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "user_id")

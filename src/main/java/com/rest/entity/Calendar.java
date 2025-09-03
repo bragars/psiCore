@@ -1,40 +1,16 @@
 package com.rest.entity;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+@AllArgsConstructor
+//@Entity
+//@Table(name = "session")
 public class Calendar {
-  public String day;
-  public String month;
-  public String year;
-  public String time;
-
-  public String getDay() {
-    return day;
-  }
-
-  public void setDay(String day) {
-    this.day = day;
-  }
-
-  public String getMonth() {
-    return month;
-  }
-
-  public void setMonth(String month) {
-    this.month = month;
-  }
-
-  public String getYear() {
-    return year;
-  }
-
-  public void setYear(String year) {
-    this.year = year;
-  }
-
-  public String getTime() {
-    return time;
-  }
-
-  public void setTime(String time) {
-    this.time = time;
-  }
+  public @Getter @Setter String day;
+  public @Getter @Setter String month;
+  public @Getter @Setter String year;
+  public @Getter @Setter String time;
 }

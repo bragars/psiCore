@@ -25,7 +25,7 @@ public class DocumentService {
      * Retorna uma lista de todos os documentos de forma simplificada.
      */
     public List<DocumentsResponse> getAllDocuments() {
-        return documentRepository.findAll().stream().map(this::convertToDocumentsResponse).collect(Collectors.toList());
+        return documentRepository.findAll().stream().map(DocumentsResponse::new).collect(Collectors.toList());
     }
 
     /**
@@ -74,12 +74,5 @@ public class DocumentService {
             throw new DocumentNotFoundException(id);
         }
         documentRepository.deleteById(id);
-    }
-
-    /**
-     * Método auxiliar para converter uma entidade Document em um DTO de resposta.
-     */
-    private DocumentsResponse convertToDocumentsResponse(Document document) {
-        return DocumentsResponse.builder().id(document.getId()).name(document.getName()).build();
     }
 }

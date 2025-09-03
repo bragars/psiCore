@@ -1,6 +1,8 @@
 package com.rest.dto.response;
 
+import com.rest.entity.Document;
 import lombok.*;
+import org.jetbrains.annotations.NotNull;
 
 @Builder
 @Getter
@@ -12,7 +14,12 @@ public class DocumentsResponse {
   private String name;
   private Long userId;
 
-  // Builder
+  public DocumentsResponse(@NotNull Document document) {
+      this.name = document.getName(); // Example of simplifying a nested object
+      this.userId = document.getUser().getId();
+  }
+
+    // Builder
   public static DocumentsResponseBuilder builder() {
     return new DocumentsResponseBuilder();
   }
