@@ -4,12 +4,14 @@ import com.rest.dto.request.NewPatientRequest;
 import com.rest.dto.request.UpdatePatientRequest;
 import com.rest.dto.response.PatientResponse;
 import com.rest.entity.Patient;
+import com.rest.events.UserRegisteredEvent;
 import com.rest.repository.IPatientDAO;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.kafka.core.KafkaTemplate;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -20,6 +22,7 @@ public class PatientService {
 
     private final IPatientDAO patientRepository;
     private final PasswordEncoder passwordEncoder;
+    private final KafkaTemplate<String, UserRegisteredEvent> kafkaTemplate; // 1. Inject KafkaTemplate
 
     @Transactional(readOnly = true)
     public List<PatientResponse> getAllPatients() {
@@ -53,6 +56,16 @@ public class PatientService {
         patient.setAbout(request.getAbout());
 
         Patient savedPatient = patientRepository.save(patient);
+
+        // 2. After successfully saving, publish an event to Kafka
+        UserRegisteredEvent event = new UserRegisteredEvent(
+                savedPatient.getId(),
+                savedPatient.getUsername(),
+                savedPatient.getEmail(),
+                "PATIENT"
+        );
+        // The topic name is "user_registered"
+        kafkaTemplate.send("user_registered", event);
 
         return new PatientResponse(savedPatient);
     }

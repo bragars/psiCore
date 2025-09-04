@@ -14,7 +14,7 @@ public class Document implements Serializable {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
 
-  private long id;
+  private Long id;
   private @Getter @Setter String name;
 
   @ManyToOne(cascade = CascadeType.ALL)

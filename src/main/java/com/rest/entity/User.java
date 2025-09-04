@@ -28,7 +28,7 @@ public class User implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
 
-  private @Getter @Setter long id;
+  private @Getter @Setter Long id;
   private @Getter @Setter String username;
   private @Getter @Setter String email;
   private @Getter @Setter Date birthday;
@@ -48,6 +48,7 @@ public class User implements UserDetails {
     this.password = password;
   }
 
+  @JsonIgnore
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority(role.name()));
