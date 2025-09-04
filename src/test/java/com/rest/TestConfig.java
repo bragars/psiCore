@@ -1,7 +1,7 @@
 package com.rest;
 
 import com.rest.config.JwtAuthenticationFilter;
-import com.rest.service.JwtService;
+import com.rest.endpoint.services.JwtService;
 import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Primary;

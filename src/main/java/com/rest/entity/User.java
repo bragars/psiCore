@@ -1,5 +1,6 @@
 package com.rest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -8,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.rest.enums.Role;
 
+import java.util.Date;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -20,14 +22,18 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
 public class User implements UserDetails {
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
 
   private @Getter @Setter long id;
-  private @Setter String username;
+  private @Getter @Setter String username;
   private @Getter @Setter String email;
+  private @Getter @Setter Date birthday;
+
+  @JsonIgnore
   private @Setter String password;
 
   @Enumerated(EnumType.STRING)
@@ -42,10 +48,6 @@ public class User implements UserDetails {
     this.password = password;
   }
 
-  public Set<Document> getDocuments() {
-    return documents;
-  }
-
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return List.of(new SimpleGrantedAuthority(role.name()));
@@ -54,30 +56,5 @@ public class User implements UserDetails {
   @Override
   public String getPassword() {
     return password;
-  }
-
-  @Override
-  public String getUsername() {
-    return username;
-  }
-
-  @Override
-  public boolean isAccountNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isAccountNonLocked() {
-    return true;
-  }
-
-  @Override
-  public boolean isCredentialsNonExpired() {
-    return true;
-  }
-
-  @Override
-  public boolean isEnabled() {
-    return true;
   }
 }
