@@ -1,0 +1,10 @@
+{
+  "java.project.sourcePaths": [
+    "src/main/java",
+    "src/main/test",
+  ],
+  "java.project.outputPath": "target/classes",
+  "java.format.settings.url": ".vscode/java-formatter.xml",
+  "java.compile.nullAnalysis.mode": "automatic",
+  "java.configuration.updateBuildConfiguration": "interactive",
+}
