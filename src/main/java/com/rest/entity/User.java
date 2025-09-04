@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.rest.enums.Role;
 
+import java.util.Date;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -21,14 +22,16 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn(name = "user_type", discriminatorType = DiscriminatorType.STRING)
 public class User implements UserDetails {
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
 
   private @Getter @Setter long id;
-  private @Setter String username;
+  private @Getter @Setter String username;
   private @Getter @Setter String email;
+  private @Getter @Setter Date birthday;
 
   @JsonIgnore
   private @Setter String password;
@@ -54,10 +57,4 @@ public class User implements UserDetails {
   public String getPassword() {
     return password;
   }
-
-  @Override
-  public String getUsername() {
-    return username;
-  }
-
 }

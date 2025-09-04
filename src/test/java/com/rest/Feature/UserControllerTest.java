@@ -1,10 +1,10 @@
 package com.rest.Feature;
 
 import com.rest.TestConfig;
-import com.rest.endpoint.Controllers.UserController;
+import com.rest.endpoint.controllers.UserController;
 import com.rest.entity.User;
 import com.rest.repository.IUserDAO;
-import com.rest.service.JwtService;
+import com.rest.endpoint.services.JwtService;
 
 import static org.mockito.Mockito.when;
 

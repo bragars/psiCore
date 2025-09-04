@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 //@Entity
-//@Table(name = "session")
+//@Table(name = "Calendar")
 public class Calendar {
   public @Getter @Setter String day;
   public @Getter @Setter String month;

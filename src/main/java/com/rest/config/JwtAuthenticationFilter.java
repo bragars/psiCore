@@ -2,7 +2,7 @@ package com.rest.config;
 
 import java.io.IOException;
 
-import com.rest.service.JwtService;
+import com.rest.endpoint.services.JwtService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;

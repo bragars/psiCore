@@ -10,6 +10,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
+@Entity
 public class TherapistsAndPatients {
     @EmbeddedId
     private TherapistsAndPatientsId id;
@@ -20,9 +21,9 @@ public class TherapistsAndPatients {
     private @Getter @Setter Patient patient;
 
     @ManyToOne
-    @MapsId("theRapistId")
+    @MapsId("therapistId")
     @JoinColumn(name = "therapist_id")
-    private @Getter @Setter Therapist course;
+    private @Getter @Setter Therapist therapist;
 
     private @Getter @Setter Status status;
 }

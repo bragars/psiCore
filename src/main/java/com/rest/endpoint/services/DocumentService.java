@@ -1,11 +1,11 @@
-package com.rest.service;
+package com.rest.endpoint.services;
 
 import com.rest.dto.request.NewDocumentRequest;
 import com.rest.dto.response.DocumentsResponse;
 import com.rest.entity.Document;
-import com.rest.exception.BadRequestException;
-import com.rest.exception.DocumentNotFoundException;
-import com.rest.exception.UserNotFoundException;
+import com.rest.endpoint.exception.BadRequestException;
+import com.rest.endpoint.exception.DocumentNotFoundException;
+import com.rest.endpoint.exception.UserNotFoundException;
 import com.rest.repository.IDocumentDAO;
 import com.rest.repository.IUserDAO;
 import lombok.RequiredArgsConstructor;

@@ -27,10 +27,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rest.TestConfig;
 import com.rest.dto.request.NewDocumentRequest;
 import com.rest.dto.response.DocumentsResponse;
-import com.rest.endpoint.Controllers.DocumentController;
+import com.rest.endpoint.controllers.DocumentController;
 import com.rest.entity.Document;
-import com.rest.service.DocumentService;
-import com.rest.service.JwtService;
+import com.rest.endpoint.services.DocumentService;
+import com.rest.endpoint.services.JwtService;
 
 @Import(TestConfig.class)
 @ExtendWith(MockitoExtension.class)

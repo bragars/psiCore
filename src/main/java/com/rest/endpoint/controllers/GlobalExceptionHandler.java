@@ -1,4 +1,4 @@
-package com.rest.endpoint.Controllers;
+package com.rest.endpoint.controllers;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.rest.exception.BadRequestException;
-import com.rest.exception.UserNotFoundException;
+import com.rest.endpoint.exception.BadRequestException;
+import com.rest.endpoint.exception.UserNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {

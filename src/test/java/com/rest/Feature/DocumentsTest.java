@@ -1,11 +1,11 @@
 package com.rest.Feature;
 
 import com.rest.TestConfig;
-import com.rest.endpoint.Controllers.DocumentController;
+import com.rest.endpoint.controllers.DocumentController;
 import com.rest.entity.Document;
 import com.rest.repository.IDocumentDAO;
 import com.rest.repository.IUserDAO;
-import com.rest.service.JwtService;
+import com.rest.endpoint.services.JwtService;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

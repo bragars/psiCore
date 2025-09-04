@@ -1,8 +1,8 @@
-package com.rest.service;
+package com.rest.endpoint.services;
 
 import com.rest.entity.Document;
 import com.rest.entity.User;
-import com.rest.exception.UserNotFoundException;
+import com.rest.endpoint.exception.UserNotFoundException;
 import com.rest.repository.IUserDAO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

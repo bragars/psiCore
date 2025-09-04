@@ -24,8 +24,8 @@ import com.rest.config.JwtAuthenticationFilter;
 import com.rest.dto.request.AuthenticationRequest;
 import com.rest.dto.request.RegisterRequest;
 import com.rest.dto.response.AuthenticationResponse;
-import com.rest.endpoint.Controllers.AuthenticationController;
-import com.rest.service.AuthenticationService;
+import com.rest.endpoint.controllers.AuthenticationController;
+import com.rest.endpoint.services.AuthenticationService;
 
 @WebMvcTest(controllers = AuthenticationController.class, excludeAutoConfiguration = SecurityAutoConfiguration.class)
 public class AuthenticationControllerTest {

@@ -4,5 +4,5 @@ import com.rest.entity.TherapistsAndPatients;
 import com.rest.entity.TherapistsAndPatientsId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ITherapistAndPatient extends JpaRepository<TherapistsAndPatients, TherapistsAndPatientsId> {
+public interface ITherapistAndPatientDAO extends JpaRepository<TherapistsAndPatients, TherapistsAndPatientsId> {
 }
